@@ -7,9 +7,19 @@ public:
 	InventoryComponent(int Width, int Height);
 	~InventoryComponent();
 
-	void AddItem(Item* item, int x, int y);
-	void GetItem(Item* item, int x, int y);
-	void RemoveItem(Item* item, int x, int y);
+	bool AddItem(Item* item);
+	Item* GetItem(int x, int y);
+	void RemoveItem(int x, int y);
+
+	int GetWidth() const
+	{
+		return Width;
+	}
+
+	int GetHeight() const
+	{
+		return Height;
+	}
 
 private:
 	int Width;

@@ -1,25 +1,26 @@
 #pragma once
+#include "InventoryComponent.h"
+
 class Character
 {
 public:
-	Character(int level, int health, int strength, int dexterity, int intelligence, int wisdom, int charisma)
-		: level(level),
-		  health(health),
-		  strength(strength),
-		  dexterity(dexterity),
-		  intelligence(intelligence),
-		  wisdom(wisdom),
-		  charisma(charisma)
+	Character(int level, int health, int strength, int dexterity, int inventoryWidth, int inventoryHeight = 0);
+
+	InventoryComponent* GetInventory() const
 	{
+		return inventory;
 	}
 
+
+
 private:
+	// Stats
 	int level;
 	int health;
 	int strength;
 	int dexterity;
-	int intelligence;
-	int wisdom;
-	int charisma;
+
+	//Components
+	InventoryComponent* inventory;
 };
 
