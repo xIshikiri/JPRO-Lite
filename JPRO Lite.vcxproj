@@ -146,6 +146,7 @@
     <ClCompile Include="src\Characters\Character.cpp" />
     <ClCompile Include="src\Components\InventoryComponent.cpp" />
     <ClCompile Include="src\Core\Game.cpp" />
+    <ClCompile Include="src\Core\Logger.h" />
     <ClCompile Include="src\Items\Item.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -3,37 +3,37 @@
 #include "Items/Item.h"
 
 InventoryComponent::InventoryComponent(int Width, int Height)
-	:Width(Width), Height(Height), Inventory(nullptr)
+	:width(Width), height(Height), inventory(nullptr)
 {
 	// Initialize the inventory with the given width and height
-	Inventory = new Item**[Height];
+	inventory = new Item**[Height];
 	for (int i = 0; i < Height; ++i)
 	{
-		Inventory[i] = new Item*[Width];
+		inventory[i] = new Item*[Width];
 		for (int j = 0; j < Width; ++j)
 		{
-			Inventory[i][j] = nullptr; // Initialize each slot to nullptr - no item
+			inventory[i][j] = nullptr; // Initialize each slot to nullptr - no item
 		}
 	}
 }
 
 InventoryComponent::~InventoryComponent()
 {
-	if (Inventory)
+	if (inventory)
 	{
 		// Collect unique Item pointers and delete them later to avoid calling delete multiple times on the same item
 		std::set<Item*> uniqueItems;
-		for (int i = 0; i < Height; ++i) {
-			for (int j = 0; j < Width; ++j)
+		for (int i = 0; i < height; ++i) {
+			for (int j = 0; j < width; ++j)
 			{
-				if (Inventory[i][j] != nullptr) {
-					uniqueItems.insert(Inventory[i][j]); // Insert unique items into the set
+				if (inventory[i][j] != nullptr) {
+					uniqueItems.insert(inventory[i][j]); // Insert unique items into the set
 				}
 			}
-			delete[] Inventory[i];
+			delete[] inventory[i];
 		}
-		delete[] Inventory;
-		Inventory = nullptr; // Set Inventory to nullptr after deletion
+		delete[] inventory;
+		inventory = nullptr; // Set Inventory to nullptr after deletion
 
 		// Delete the unique items
 		for (Item* item : uniqueItems)
@@ -43,23 +43,23 @@ InventoryComponent::~InventoryComponent()
 	}
 }
 
-bool InventoryComponent::AddItem(Item* Item)
+bool InventoryComponent::addItem(Item* item)
 {
 	// Find a valid slot in the inventory
-	for (int i = 0; i < Height; ++i)
+	for (int i = 0; i < height; ++i)
 	{
-		for (int j = 0; j < Width; ++j)
+		for (int j = 0; j < width; ++j)
 		{
 			// Check if the current slot is empty and if the item fits in the inventory
-			if (Inventory[i][j] == nullptr && i + Item->GetHeight() <= Height && j + Item->GetWidth() <= Width)
+			if (inventory[i][j] == nullptr && i + item->getHeight() <= height && j + item->getWidth() <= width)
 			{
 				// Found potential slot, check if the item can fit without overlapping other items
 				bool bIsSlotValid = true;
-				for (int k = 0; k < Item->GetHeight(); ++k)
+				for (int k = 0; k < item->getHeight(); ++k)
 				{
-					for (int l = 0; l < Item->GetWidth(); ++l)
+					for (int l = 0; l < item->getWidth(); ++l)
 					{
-						if (Inventory[i + k][j + l] != nullptr)
+						if (inventory[i + k][j + l] != nullptr)
 						{
 							bIsSlotValid = false; // Slot is not valid as it overlaps with another item
 							break;
@@ -70,11 +70,11 @@ bool InventoryComponent::AddItem(Item* Item)
 				if (bIsSlotValid)
 				{
 					// Place the item in the inventory
-					for (int k = 0; k < Item->GetHeight(); ++k)
+					for (int k = 0; k < item->getHeight(); ++k)
 					{
-						for (int l = 0; l < Item->GetWidth(); ++l)
+						for (int l = 0; l < item->getWidth(); ++l)
 						{
-							Inventory[i + k][j + l] = Item; // Place the item in the slot
+							inventory[i + k][j + l] = item; // Place the item in the slot
 						}
 					}
 					return true; // Item added successfully
@@ -85,42 +85,42 @@ bool InventoryComponent::AddItem(Item* Item)
 	return false; // No valid slot found, item not added
 }
 
-Item* InventoryComponent::GetItem(int x, int y)
+Item* InventoryComponent::getItem(int x, int y)
 {
-	if (x < 0 || x >= Width || y < 0 || y >= Height)
+	if (x < 0 || x >= width || y < 0 || y >= height)
 	{
 		return nullptr; // Out of bounds
 	}
-	return Inventory[y][x]; // Return the item at the specified coordinates
+	return inventory[y][x]; // Return the item at the specified coordinates
 }
 
-void InventoryComponent::RemoveItem(int x, int y)
+void InventoryComponent::removeItem(int x, int y)
 {
-	if (x < 0 || x >= Width || y < 0 || y >= Height)
+	if (x < 0 || x >= width || y < 0 || y >= height)
 	{
 		return; // Out of bounds
 	}
 
-	if (Inventory[y][x] == nullptr)
+	if (inventory[y][x] == nullptr)
 	{
 		return; // No item at the specified coordinates
 	}
 
 	// Save the item pointer to delete it later and avoid memory leaks
-	Item* Item = Inventory[y][x];
+	Item* item = inventory[y][x];
 
 	// Free the slots occupied by the item
-	for (int i = 0; i < Height; ++i)
+	for (int i = 0; i < height; ++i)
 	{
-		for (int j = 0; j < Width; ++j)
+		for (int j = 0; j < width; ++j)
 		{
-			if (Inventory[i][j] == Item)
+			if (inventory[i][j] == item)
 			{
-				Inventory[i][j] = nullptr; // Set the slot to nullptr
+				inventory[i][j] = nullptr; // Set the slot to nullptr
 			}
 		}
 	}
 
 	// Delete the item to free memory
-	delete Item;
+	delete item;
 }

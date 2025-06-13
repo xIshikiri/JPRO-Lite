@@ -6,12 +6,35 @@ class Character
 public:
 	Character(int level, int health, int strength, int dexterity, int inventoryWidth, int inventoryHeight = 0);
 
-	InventoryComponent* GetInventory() const
+	InventoryComponent* getInventory() const
 	{
 		return inventory;
 	}
 
+	int getLevel() const
+	{
+		return level;
+	}
 
+	int getHealth() const
+	{
+		return health;
+	}
+
+	int getStrength() const
+	{
+		return strength;
+	}
+
+	int getDexterity() const
+	{
+		return dexterity;
+	}
+
+	bool isAlive() const
+	{
+		return health > 0;
+	}
 
 private:
 	// Stats

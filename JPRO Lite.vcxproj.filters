@@ -27,6 +27,9 @@
     <ClCompile Include="src\Core\Game.cpp">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="src\Core\Logger.h">
+      <Filter>Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Components\InventoryComponent.h">

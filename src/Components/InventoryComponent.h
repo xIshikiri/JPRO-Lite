@@ -7,23 +7,23 @@ public:
 	InventoryComponent(int Width, int Height);
 	~InventoryComponent();
 
-	bool AddItem(Item* item);
-	Item* GetItem(int x, int y);
-	void RemoveItem(int x, int y);
+	bool addItem(Item* item);
+	Item* getItem(int x, int y);
+	void removeItem(int x, int y);
 
-	int GetWidth() const
+	int getWidth() const
 	{
-		return Width;
+		return width;
 	}
 
-	int GetHeight() const
+	int getHeight() const
 	{
-		return Height;
+		return height;
 	}
 
 private:
-	int Width;
-	int Height;
-	Item*** Inventory;
+	int width;
+	int height;
+	Item*** inventory;
 };
 

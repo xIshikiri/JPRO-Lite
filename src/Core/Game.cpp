@@ -1,12 +1,11 @@
 #include <iostream>
+
+#include "Logger.h"
 #include "Characters/Character.h"
 
 int main()
 {
 	Character* Player = new Character(1, 100, 10, 10, 10);
-	std::cout << "Character created with inventory size: "
-		<< Player->GetInventory()->GetWidth() << "x"
-		<< Player->GetInventory()->GetHeight() << '\n';
 
 	delete Player; // Clean up the character to avoid memory leaks
 

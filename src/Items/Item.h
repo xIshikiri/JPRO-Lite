@@ -4,45 +4,49 @@
 class Item
 {
 public:
-	Item(std::string name, std::string description, int Width, int Height)
-		: Name(std::move(name)),
-		  Description(std::move(description)),
-		  Width(Width),
-		  Height(Height),
-		  Symbol(0)
+	Item(std::string name, std::string description, int width, int height)
+		: name(std::move(name)),
+		  description(std::move(description)),
+		  width(width),
+		  height(height),
+		  symbol(0)
 	{
+		if (width <= 0 || height <= 0)
+		{
+			
+		}
 	}
 
-	std::string GetName() const
+	std::string getName() const
 	{
-		return Name;
+		return name;
 	}
 
-	std::string GetDescription() const
+	std::string getDescription() const
 	{
-		return Description;
+		return description;
 	}
 
-	int GetWidth() const
+	int getWidth() const
 	{
-		return Width;
+		return width;
 	}
 
-	int GetHeight() const
+	int getHeight() const
 	{
-		return Height;
+		return height;
 	}
 
-	char GetSymbol() const
+	char getSymbol() const
 	{
-		return Symbol;
+		return symbol;
 	}
 
 private:
-	std::string Name;
-	std::string Description;
-	int Width;
-	int Height;
-	char Symbol;
+	std::string name;
+	std::string description;
+	int width;
+	int height;
+	char symbol;
 };
 
