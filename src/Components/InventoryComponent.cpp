@@ -1,5 +1,6 @@
 #include "InventoryComponent.h"
 #include <set>
+#include "Items/Item.h"
 
 InventoryComponent::InventoryComponent(int Width, int Height)
 	:Width(Width), Height(Height), Inventory(nullptr)

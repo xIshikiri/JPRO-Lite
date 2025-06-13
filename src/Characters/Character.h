@@ -1,5 +1,5 @@
 #pragma once
-#include "InventoryComponent.h"
+#include "../Components/InventoryComponent.h"
 
 class Character
 {
