@@ -1,10 +1,19 @@
 #pragma once
-#include "../Components/InventoryComponent.h"
+#include "InventoryComponent.h"
+#include "IGameEntity.h"
 
-class Character
+class Character : public IGameEntity
 {
 public:
 	Character(int level, int health, int strength, int dexterity, int inventoryWidth, int inventoryHeight = 0);
+	~Character() override;
+	Character(const Character& other);
+	Character& operator=(const Character& other);
+	Character(Character&& other) noexcept;
+	Character& operator=(Character&& other) noexcept;
+
+	// IGameEntity interface
+	virtual char getDisplayChar() const override { return 'C'; }
 
 	InventoryComponent* getInventory() const
 	{
@@ -46,4 +55,3 @@ private:
 	//Components
 	InventoryComponent* inventory;
 };
-

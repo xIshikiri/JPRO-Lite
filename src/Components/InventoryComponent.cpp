@@ -1,16 +1,15 @@
 #include "InventoryComponent.h"
 #include <set>
-#include "Items/Item.h"
 
-InventoryComponent::InventoryComponent(int Width, int Height)
-	:width(Width), height(Height), inventory(nullptr)
+InventoryComponent::InventoryComponent(int width, int height)
+	:width(width), height(height), inventory(nullptr)
 {
 	// Initialize the inventory with the given width and height
-	inventory = new Item**[Height];
-	for (int i = 0; i < Height; ++i)
+	inventory = new Item**[height];
+	for (int i = 0; i < height; ++i)
 	{
-		inventory[i] = new Item*[Width];
-		for (int j = 0; j < Width; ++j)
+		inventory[i] = new Item*[width];
+		for (int j = 0; j < width; ++j)
 		{
 			inventory[i][j] = nullptr; // Initialize each slot to nullptr - no item
 		}
@@ -41,6 +40,93 @@ InventoryComponent::~InventoryComponent()
 			delete item;
 		}
 	}
+}
+
+InventoryComponent::InventoryComponent(const InventoryComponent& other)
+	: width(other.width), height(other.height)
+{
+	// Create a deep copy of the inventory
+	inventory = new Item**[height];
+	for (int i = 0; i < height; ++i)
+	{
+		inventory[i] = new Item*[width];
+		for (int j = 0; j < width; ++j)
+		{
+			if (other.inventory[i][j] != nullptr)
+			{
+				inventory[i][j] = new Item(*other.inventory[i][j]); // Deep copy of the item
+			}
+			else
+			{
+				inventory[i][j] = nullptr; // No item in this slot
+			}
+		}
+	}
+}
+
+InventoryComponent::InventoryComponent(InventoryComponent&& other) noexcept
+	: width(other.width), height(other.height), inventory(other.inventory)
+{
+	// Transfer ownership of the inventory
+	other.inventory = nullptr; // Set the moved-from object's inventory to nullptr
+	other.width = 0;
+	other.height = 0;
+}
+
+InventoryComponent& InventoryComponent::operator=(const InventoryComponent& other)
+{
+	if (this != &other) // Check for self-assignment
+	{
+		width = other.width;
+		height = other.height;
+
+		// Clean up existing inventory
+		for (int i = 0; i < height; ++i)
+		{
+			delete[] inventory[i];
+		}
+		delete[] inventory;
+
+		// Create a deep copy of the inventory
+		inventory = new Item**[height];
+		for (int i = 0; i < height; ++i)
+		{
+			inventory[i] = new Item*[width];
+			for (int j = 0; j < width; ++j)
+			{
+				if (other.inventory[i][j] != nullptr)
+				{
+					inventory[i][j] = new Item(*other.inventory[i][j]); // Deep copy of the item
+				}
+				else
+				{
+					inventory[i][j] = nullptr; // No item in this slot
+				}
+			}
+		}
+	}
+	return *this;
+}
+
+InventoryComponent& InventoryComponent::operator=(InventoryComponent&& other) noexcept
+{
+	if (this != &other) // Check for self-assignment
+	{
+		width = other.width;
+		height = other.height;
+
+		// Clean up existing inventory
+		for (int i = 0; i < height; ++i)
+		{
+			delete[] inventory[i];
+		}
+		delete[] inventory;
+		inventory = other.inventory; // Transfer ownership of the inventory
+		other.inventory = nullptr; // Set the moved-from object's inventory to nullptr
+		other.width = 0;
+		other.height = 0;
+	}
+	return *this;
 }
 
 bool InventoryComponent::addItem(Item* item)
@@ -85,7 +171,7 @@ bool InventoryComponent::addItem(Item* item)
 	return false; // No valid slot found, item not added
 }
 
-Item* InventoryComponent::getItem(int x, int y)
+Item* InventoryComponent::getItem(int x, int y) const
 {
 	if (x < 0 || x >= width || y < 0 || y >= height)
 	{

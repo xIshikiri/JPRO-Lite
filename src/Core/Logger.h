@@ -1,9 +1,8 @@
+#pragma once
 #ifdef _DEBUG
-#include <iostream>
 #include <windows.h>
 #include <fstream>
 #include <sstream>
-#include <ctime>
 
 enum class LogLevel : uint8_t { INFO, WARN, ERR };
 

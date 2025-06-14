@@ -13,6 +13,12 @@
     <Filter Include="Core">
       <UniqueIdentifier>{003e20d4-91bb-4bd5-a5f3-faa36a209bda}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Objects">
+      <UniqueIdentifier>{b9abc606-e2c6-4412-bf59-3f9201658834}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{02365eb4-f4ac-489f-941c-b6876aa9138e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Components\InventoryComponent.cpp">
@@ -30,6 +36,16 @@
     <ClCompile Include="src\Core\Logger.h">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="src\Core\TurnManager.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\WorldManager.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Characters\PlayerCharacter.cpp">
+      <Filter>Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utils\UIUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Components\InventoryComponent.h">
@@ -41,5 +57,18 @@
     <ClInclude Include="src\Items\Item.h">
       <Filter>Items</Filter>
     </ClInclude>
+    <ClInclude Include="src\Core\TurnManager.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Objects\IGameEntity.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\WorldManager.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Characters\PlayerCharacter.h">
+      <Filter>Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Utils\UIUtils.h" />
   </ItemGroup>
 </Project>

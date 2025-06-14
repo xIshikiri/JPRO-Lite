@@ -88,7 +88,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\src\Utils;$(ProjectDir)\src\Objects;$(ProjectDir)\src\Items;$(ProjectDir)\src\Components;$(ProjectDir)\src\Core;$(ProjectDir)\src\Characters</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -103,7 +103,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\src\Utils;$(ProjectDir)\src\Objects;$(ProjectDir)\src\Items;$(ProjectDir)\src\Components;$(ProjectDir)\src\Core;$(ProjectDir)\src\Characters</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -118,7 +118,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\src\Utils;$(ProjectDir)\src\Objects;$(ProjectDir)\src\Items;$(ProjectDir)\src\Components;$(ProjectDir)\src\Core;$(ProjectDir)\src\Characters</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -133,7 +133,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\src\Utils;$(ProjectDir)\src\Objects;$(ProjectDir)\src\Items;$(ProjectDir)\src\Components;$(ProjectDir)\src\Core;$(ProjectDir)\src\Characters</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -144,15 +144,24 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Characters\Character.cpp" />
+    <ClCompile Include="src\Characters\PlayerCharacter.cpp" />
     <ClCompile Include="src\Components\InventoryComponent.cpp" />
     <ClCompile Include="src\Core\Game.cpp" />
     <ClCompile Include="src\Core\Logger.h" />
+    <ClCompile Include="src\Core\TurnManager.cpp" />
+    <ClCompile Include="src\Core\WorldManager.cpp" />
     <ClCompile Include="src\Items\Item.cpp" />
+    <ClCompile Include="src\Utils\UIUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Characters\Character.h" />
+    <ClInclude Include="src\Characters\PlayerCharacter.h" />
     <ClInclude Include="src\Components\InventoryComponent.h" />
+    <ClInclude Include="src\Core\TurnManager.h" />
+    <ClInclude Include="src\Core\WorldManager.h" />
     <ClInclude Include="src\Items\Item.h" />
+    <ClInclude Include="src\Objects\IGameEntity.h" />
+    <ClInclude Include="src\Utils\UIUtils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
