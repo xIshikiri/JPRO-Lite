@@ -9,14 +9,14 @@
 int main()
 {
 	WorldManager* worldManager = new WorldManager();
-	worldManager->render();
 
 	int choice, x = 0, y = 0;
 	bool bContinue = true;
 
 	// Main loop for placing entities in the world
 	do {
-
+		UIUtils::clearScreen();
+		worldManager->render(); // Render the world after each placement
 		std::cout << "Choose what to place in the world:\n"
 			<< "1. Player Character\n"
 			<< "2. NPC Character\n"
@@ -71,10 +71,7 @@ int main()
 				break;
 			}
 		}
-		if (choice != 4)
-			UIUtils::clearScreen();
-			worldManager->render(); // Render the world after each placement
-	} while (choice != 4);
+	} while (bContinue);
 
 	delete worldManager;
 

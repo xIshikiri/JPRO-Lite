@@ -33,9 +33,6 @@
     <ClCompile Include="src\Core\Game.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="src\Core\Logger.h">
-      <Filter>Core</Filter>
-    </ClCompile>
     <ClCompile Include="src\Core\TurnManager.cpp">
       <Filter>Core</Filter>
     </ClCompile>
@@ -45,7 +42,9 @@
     <ClCompile Include="src\Characters\PlayerCharacter.cpp">
       <Filter>Characters</Filter>
     </ClCompile>
-    <ClCompile Include="src\Utils\UIUtils.cpp" />
+    <ClCompile Include="src\Utils\UIUtils.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Components\InventoryComponent.h">
@@ -69,6 +68,11 @@
     <ClInclude Include="src\Characters\PlayerCharacter.h">
       <Filter>Characters</Filter>
     </ClInclude>
-    <ClInclude Include="src\Utils\UIUtils.h" />
+    <ClInclude Include="src\Utils\Logger.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Utils\UIUtils.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

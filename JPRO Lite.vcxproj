@@ -147,7 +147,6 @@
     <ClCompile Include="src\Characters\PlayerCharacter.cpp" />
     <ClCompile Include="src\Components\InventoryComponent.cpp" />
     <ClCompile Include="src\Core\Game.cpp" />
-    <ClCompile Include="src\Core\Logger.h" />
     <ClCompile Include="src\Core\TurnManager.cpp" />
     <ClCompile Include="src\Core\WorldManager.cpp" />
     <ClCompile Include="src\Items\Item.cpp" />
@@ -161,6 +160,7 @@
     <ClInclude Include="src\Core\WorldManager.h" />
     <ClInclude Include="src\Items\Item.h" />
     <ClInclude Include="src\Objects\IGameEntity.h" />
+    <ClInclude Include="src\Utils\Logger.h" />
     <ClInclude Include="src\Utils\UIUtils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
