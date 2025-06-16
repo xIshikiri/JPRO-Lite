@@ -24,7 +24,7 @@ char Tile::getDisplayChar() const
 WorldManager::WorldManager()
 {
 	clearWorld(); // Initialize the world with empty tiles
-	DEBUG_LOG(LogLevel::INFO, "WorldManager initialized with a cleared world.");
+	DEBUG_LOG(LogLevel::INFO, "WorldManager initialized.");
 }
 
 WorldManager::~WorldManager()

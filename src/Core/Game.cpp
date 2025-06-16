@@ -40,14 +40,14 @@ int main()
 		{
 			case 1:
 			{
-				PlayerCharacter* player = new PlayerCharacter(1, 100, 10, 10, 5);
+				PlayerCharacter* player = new PlayerCharacter("Player", 1, 100, 10, 10, 5);
 				worldManager->setEntity(x, y, player);
 				std::cout << "Player Character placed at (" << x << ", " << y << ").\n";
 				break;
 			}
 			case 2:
 			{
-				Character* npc = new Character(1, 50, 5, 5, 3);
+				Character* npc = new Character("Stefan", 1, 50, 5, 5, 3);
 				worldManager->setEntity(x, y, npc);
 				std::cout << "NPC Character placed at (" << x << ", " << y << ").\n";
 				break;
@@ -74,6 +74,5 @@ int main()
 	} while (bContinue);
 
 	delete worldManager;
-
 	return 0;
 }

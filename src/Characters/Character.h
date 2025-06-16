@@ -5,7 +5,7 @@
 class Character : public IGameEntity
 {
 public:
-	Character(int level, int health, int strength, int dexterity, int inventoryWidth, int inventoryHeight = 0);
+	Character(std::string name, int level, int health, int strength, int dexterity, int inventoryWidth, int inventoryHeight = 0);
 	~Character() override;
 	Character(const Character& other);
 	Character& operator=(const Character& other);
@@ -13,11 +13,16 @@ public:
 	Character& operator=(Character&& other) noexcept;
 
 	// IGameEntity interface
-	virtual char getDisplayChar() const override { return 'C'; }
+	virtual char getDisplayChar() const override { return 'N'; }
 
 	InventoryComponent* getInventory() const
 	{
 		return inventory;
+	}
+
+	std::string getName() const
+	{
+		return name;
 	}
 
 	int getLevel() const
@@ -46,6 +51,8 @@ public:
 	}
 
 private:
+	std::string name; // Optional name for the character, can be set later
+
 	// Stats
 	int level;
 	int health;

@@ -1,8 +1,8 @@
 #include "Character.h"
 #include "Logger.h"
 
-Character::Character(int level, int health, int strength, int dexterity, int inventoryWidth, int inventoryHeight)
-	: level(level), health(health), strength(strength), dexterity(dexterity)
+Character::Character(std::string name, int level, int health, int strength, int dexterity, int inventoryWidth, int inventoryHeight)
+	: name(std::move(name)), level(level), health(health), strength(strength), dexterity(dexterity)
 {
 	if (inventoryHeight == 0)
 	{
