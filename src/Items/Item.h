@@ -31,6 +31,8 @@ public:
 	int getHeight() const { return height; }
 	char getSymbol() const { return symbol; }
 
+	bool rotateItem();
+
 private:
 	std::string name;
 	std::string description;
