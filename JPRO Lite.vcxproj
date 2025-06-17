@@ -88,7 +88,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)\src\Utils;$(ProjectDir)\src\Objects;$(ProjectDir)\src\Items;$(ProjectDir)\src\Components;$(ProjectDir)\src\Core;$(ProjectDir)\src\Characters</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\src\UI;$(ProjectDir)\src\Utils;$(ProjectDir)\src\Objects;$(ProjectDir)\src\Items;$(ProjectDir)\src\Components;$(ProjectDir)\src\Core;$(ProjectDir)\src\Characters</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -103,7 +103,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)\src\Utils;$(ProjectDir)\src\Objects;$(ProjectDir)\src\Items;$(ProjectDir)\src\Components;$(ProjectDir)\src\Core;$(ProjectDir)\src\Characters</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\src\UI;$(ProjectDir)\src\Utils;$(ProjectDir)\src\Objects;$(ProjectDir)\src\Items;$(ProjectDir)\src\Components;$(ProjectDir)\src\Core;$(ProjectDir)\src\Characters</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -118,7 +118,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)\src\Utils;$(ProjectDir)\src\Objects;$(ProjectDir)\src\Items;$(ProjectDir)\src\Components;$(ProjectDir)\src\Core;$(ProjectDir)\src\Characters</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\src\UI;$(ProjectDir)\src\Utils;$(ProjectDir)\src\Objects;$(ProjectDir)\src\Items;$(ProjectDir)\src\Components;$(ProjectDir)\src\Core;$(ProjectDir)\src\Characters</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -133,7 +133,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)\src\Utils;$(ProjectDir)\src\Objects;$(ProjectDir)\src\Items;$(ProjectDir)\src\Components;$(ProjectDir)\src\Core;$(ProjectDir)\src\Characters</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\src\UI;$(ProjectDir)\src\Utils;$(ProjectDir)\src\Objects;$(ProjectDir)\src\Items;$(ProjectDir)\src\Components;$(ProjectDir)\src\Core;$(ProjectDir)\src\Characters</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -147,19 +147,36 @@
     <ClCompile Include="src\Characters\PlayerCharacter.cpp" />
     <ClCompile Include="src\Components\InventoryComponent.cpp" />
     <ClCompile Include="src\Core\Game.cpp" />
+    <ClCompile Include="src\Core\GameInstance.cpp" />
     <ClCompile Include="src\Core\TurnManager.cpp" />
+    <ClCompile Include="src\Core\UIManager.cpp" />
     <ClCompile Include="src\Core\WorldManager.cpp" />
     <ClCompile Include="src\Items\Item.cpp" />
+    <ClCompile Include="src\UI\CombatScreen.cpp" />
+    <ClCompile Include="src\UI\DialogueScreen.cpp" />
+    <ClCompile Include="src\UI\ExplorationScreen.cpp" />
+    <ClCompile Include="src\UI\InventoryScreen.cpp" />
+    <ClCompile Include="src\UI\MainMenuScreen.cpp" />
+    <ClCompile Include="src\UI\WorldCreator.cpp" />
     <ClCompile Include="src\Utils\UIUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Characters\Character.h" />
     <ClInclude Include="src\Characters\PlayerCharacter.h" />
     <ClInclude Include="src\Components\InventoryComponent.h" />
+    <ClInclude Include="src\Core\GameInstance.h" />
     <ClInclude Include="src\Core\TurnManager.h" />
+    <ClInclude Include="src\Core\UIManager.h" />
     <ClInclude Include="src\Core\WorldManager.h" />
     <ClInclude Include="src\Items\Item.h" />
     <ClInclude Include="src\Objects\IGameEntity.h" />
+    <ClInclude Include="src\UI\CombatScreen.h" />
+    <ClInclude Include="src\UI\DialogueScreen.h" />
+    <ClInclude Include="src\UI\ExplorationScreen.h" />
+    <ClInclude Include="src\UI\InventoryScreen.h" />
+    <ClInclude Include="src\UI\IUIScreen.h" />
+    <ClInclude Include="src\UI\MainMenuScreen.h" />
+    <ClInclude Include="src\UI\WorldCreator.h" />
     <ClInclude Include="src\Utils\Logger.h" />
     <ClInclude Include="src\Utils\UIUtils.h" />
   </ItemGroup>

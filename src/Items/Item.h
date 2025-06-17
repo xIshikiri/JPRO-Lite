@@ -25,30 +25,11 @@ public:
 	// IGameEntity interface
 	char getDisplayChar() const override { return getSymbol(); };
 
-	std::string getName() const
-	{
-		return name;
-	}
-
-	std::string getDescription() const
-	{
-		return description;
-	}
-
-	int getWidth() const
-	{
-		return width;
-	}
-
-	int getHeight() const
-	{
-		return height;
-	}
-
-	char getSymbol() const
-	{
-		return symbol;
-	}
+	std::string getName() const { return name; }
+	std::string getDescription() const { return description; }
+	int getWidth() const { return width; }
+	int getHeight() const { return height; }
+	char getSymbol() const { return symbol; }
 
 private:
 	std::string name;

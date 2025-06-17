@@ -46,6 +46,31 @@ bool WorldManager::isWalkable(int x, int y) const
 	return false; // Out of bounds is not walkable
 }
 
+bool WorldManager::setEntity(int x, int y, IGameEntity* entity)
+{
+	if (entity == nullptr)
+	{
+		DEBUG_LOG(LogLevel::ERR, "Attempted to set a null entity at (" << x << ", " << y << ").");
+		return false; // Do not allow setting a null entity, for removal use removeEntity()
+	}
+	if (isInBounds(x, y))
+	{
+		if (world[y][x].entity)
+		{
+			DEBUG_LOG(LogLevel::WARN, "Overwriting existing entity at (" << x << ", " << y << ").");
+			delete world[y][x].entity; // Delete the existing entity to avoid memory leaks
+		}
+		world[y][x].entity = entity;
+		return true;
+	}
+	else
+	{
+		// Handle out of bounds case
+		DEBUG_LOG(LogLevel::ERR, "Attempted to set entity out of bounds at (" << x << ", " << y << ")");
+		return false;
+	}
+}
+
 bool WorldManager::moveEntity(int fromX, int fromY, int toX, int toY)
 {
 	if (!isInBounds(fromX, fromY) || !isInBounds(toX, toY))
@@ -66,49 +91,52 @@ bool WorldManager::moveEntity(int fromX, int fromY, int toX, int toY)
 	return true;
 }
 
-void WorldManager::setEntity(int x, int y, IGameEntity* entity)
+bool WorldManager::removeEntity(int x, int y)
 {
-	if (entity == nullptr)
-	{
-		DEBUG_LOG(LogLevel::ERR, "Attempted to set a null entity at (" << x << ", " << y << ").");
-		return; // Do not allow setting a null entity, for removal use removeEntity()
-	}
 	if (isInBounds(x, y))
 	{
 		if (world[y][x].entity)
 		{
-			DEBUG_LOG(LogLevel::WARN, "Overwriting existing entity at (" << x << ", " << y << ").");
-			delete world[y][x].entity; // Delete the existing entity to avoid memory leaks
+			delete world[y][x].entity; // Delete the entity to avoid memory leaks
+			world[y][x].entity = nullptr; // Clear the entity pointer
+			return true;
 		}
-		world[y][x].entity = entity;
+		else
+		{
+			DEBUG_LOG(LogLevel::WARN, "No entity to remove at (" << x << ", " << y << ").");
+			return false; // No entity to remove
+		}
 	}
 	else
 	{
-		// Handle out of bounds case
-		DEBUG_LOG(LogLevel::ERR, "Attempted to set entity out of bounds at (" << x << ", " << y << ")");
+		DEBUG_LOG(LogLevel::ERR, "Attempted to remove entity out of bounds at (" << x << ", " << y << ")");
+		return false; // Out of bounds
 	}
 }
 
-void WorldManager::setTerrain(int x, int y, Tile::TerrainType terrain)
+
+bool WorldManager::setTerrain(int x, int y, Tile::TerrainType terrain)
 {
 	if (isInBounds(x, y))
 	{
 		world[y][x].terrain = terrain; // Set the terrain type at the specified coordinates
+		return true;
 	}
 	else
 	{
 		// Handle out of bounds case
 		DEBUG_LOG(LogLevel::ERR, "Attempted to set terrain out of bounds at (" << x << ", " << y << ")");
+		return false; // Out of bounds
 	}
 }
 
 void WorldManager::render() const
 {
-	for (int y = 0; y < HEIGHT; ++y)
+	for (const auto& y : world)
 	{
-		for (int x = 0; x < WIDTH; ++x)
+		for (auto x : y)
 		{
-			std::cout << world[y][x].getDisplayChar() << " ";
+			std::cout << x.getDisplayChar() << " ";
 		}
 		std::cout << "\n";
 	}

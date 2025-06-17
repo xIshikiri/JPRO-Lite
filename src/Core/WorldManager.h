@@ -35,9 +35,11 @@ public:
 
 	bool isInBounds(int x, int y) const;
 	bool isWalkable(int x, int y) const;
+	bool setEntity(int x, int y, IGameEntity* entity);
 	bool moveEntity(int fromX, int fromY, int toX, int toY);
-	void setEntity(int x, int y, IGameEntity* entity);
-	void setTerrain(int x, int y, Tile::TerrainType terrain);
+	bool removeEntity(int x, int y);
+	
+	bool setTerrain(int x, int y, Tile::TerrainType terrain);
 	void render() const;
 private:
 	Tile world[HEIGHT][WIDTH]; // 2D array representing the world grid

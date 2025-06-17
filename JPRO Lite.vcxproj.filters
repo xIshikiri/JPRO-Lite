@@ -19,6 +19,9 @@
     <Filter Include="Utils">
       <UniqueIdentifier>{02365eb4-f4ac-489f-941c-b6876aa9138e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{f0cfb19d-7e58-4f35-83db-264d8d2990f3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Components\InventoryComponent.cpp">
@@ -44,6 +47,30 @@
     </ClCompile>
     <ClCompile Include="src\Utils\UIUtils.cpp">
       <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\MainMenuScreen.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\WorldCreator.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\UIManager.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\GameInstance.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\CombatScreen.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\DialogueScreen.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\ExplorationScreen.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\InventoryScreen.cpp">
+      <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -73,6 +100,33 @@
     </ClInclude>
     <ClInclude Include="src\Utils\UIUtils.h">
       <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\IUIScreen.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\MainMenuScreen.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\WorldCreator.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\UIManager.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\GameInstance.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\CombatScreen.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\DialogueScreen.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\ExplorationScreen.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\InventoryScreen.h">
+      <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
