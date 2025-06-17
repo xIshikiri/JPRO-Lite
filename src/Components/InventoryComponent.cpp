@@ -1,7 +1,7 @@
 #include "InventoryComponent.h"
 #include <set>
 
-InventoryComponent::InventoryComponent(int width, int height)
+InventoryComponent::InventoryComponent(int width = 10, int height = 10)
 	:width(width), height(height), inventory(nullptr)
 {
 	// Initialize the inventory with the given width and height

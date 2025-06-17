@@ -35,6 +35,17 @@ UIManager::~UIManager()
 	DEBUG_LOG(LogLevel::INFO, "UIManager destroyed and all screens cleaned up.");
 }
 
+void UIManager::initialize()
+{
+	// Initialize all screens
+	if (mainMenuScreen) mainMenuScreen->initialize();
+	if (worldCreatorScreen) worldCreatorScreen->initialize();
+	if (explorationScreen) explorationScreen->initialize();
+	if (combatScreen) combatScreen->initialize();
+	if (inventoryScreen) inventoryScreen->initialize();
+	if (dialogueScreen) dialogueScreen->initialize();
+}
+
 void UIManager::setScreen(GameState state)
 {
 	switch (state)
@@ -64,7 +75,6 @@ void UIManager::setScreen(GameState state)
 		DEBUG_LOG(LogLevel::WARN, "Attempted to set an invalid game state screen.");
 		return; // Invalid state, do nothing
 	}
-	DEBUG_LOG(LogLevel::INFO, "UIManager switched to screen for state: " << UIUtils::gameStateToString(state));
 }
 
 void UIManager::update()

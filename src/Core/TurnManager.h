@@ -3,5 +3,6 @@
 
 class TurnManager
 {
-	
+public:
+	void initialize(); // Initialize the turn manager
 };

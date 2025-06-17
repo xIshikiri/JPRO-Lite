@@ -1,7 +1,10 @@
 #include "UIUtils.h"
 #include <cstdlib>
+#include <iostream>
 
 #include "GameInstance.h"
+#include "Logger.h"
+#include "WorldManager.h"
 
 void UIUtils::clearScreen()
 {
@@ -32,5 +35,32 @@ std::string UIUtils::gameStateToString(GameState state)
 		return "Exit";
 	default:
 		return "Unknown State";
+	}
+}
+
+void UIUtils::renderGameWorld(WorldManager* worldManager)
+{
+	if (!worldManager)
+	{
+		DEBUG_LOG(LogLevel::ERR, "WorldManager is null, cannot render game world.");
+		return;
+	}
+	for (int y = 0; y < WorldManager::HEIGHT; ++y)
+	{
+		for (int x = 0; x < WorldManager::WIDTH; ++x)
+		{
+			const Tile& tile = worldManager->getTile(x, y);
+			if (tile.entity)
+			{
+				// If there's an entity, display its character
+				std::cout << tile.entity->getDisplayChar() << ' ';
+			}
+			else
+			{
+				// Otherwise, display the terrain character
+				std::cout << tile.getDisplayChar() << ' ';
+			}
+		}
+		std::cout << '\n';
 	}
 }

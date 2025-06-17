@@ -2,7 +2,9 @@
 
 #include <iostream>
 
+#include "GameplayStatics.h"
 #include "Logger.h"
+#include "PlayerCharacter.h"
 
 char Tile::getDisplayChar() const
 {
@@ -32,6 +34,11 @@ WorldManager::~WorldManager()
 	clearWorld(); // Clean up the world tiles
 }
 
+void WorldManager::initialize()
+{
+	setEntity(0, 0, GameplayStatics::getPlayerCharacter()); // Set the player character at the starting position (0, 0)
+}
+
 bool WorldManager::isInBounds(int x, int y) const
 {
 	return x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT;
@@ -57,8 +64,8 @@ bool WorldManager::setEntity(int x, int y, IGameEntity* entity)
 	{
 		if (world[y][x].entity)
 		{
-			DEBUG_LOG(LogLevel::WARN, "Overwriting existing entity at (" << x << ", " << y << ").");
-			delete world[y][x].entity; // Delete the existing entity to avoid memory leaks
+			DEBUG_LOG(LogLevel::WARN, "Tried overwriting existing entity at (" << x << ", " << y << ").");
+			return false; // Tile already occupied by another entity
 		}
 		world[y][x].entity = entity;
 		return true;
@@ -75,14 +82,17 @@ bool WorldManager::moveEntity(int fromX, int fromY, int toX, int toY)
 {
 	if (!isInBounds(fromX, fromY) || !isInBounds(toX, toY))
 	{
+		DEBUG_LOG(LogLevel::ERR, "Attempted to move entity out of bounds from (" << fromX << ", " << fromY << ") to (" << toX << ", " << toY << ")");
 		return false; // Out of bounds
 	}
-	if (!world[fromY][fromX].isWalkable() || !world[toY][toX].isWalkable())
+	if (!world[toY][toX].isWalkable())
 	{
-		return false; // Either the source or destination is not walkable
+		DEBUG_LOG(LogLevel::ERR, "Destination tile (" << toX << ", " << toY << ") is not walkable.");
+		return false; // Destination is not walkable
 	}
 	if (world[fromY][fromX].entity == nullptr)
 	{
+		DEBUG_LOG(LogLevel::ERR, "No entity to move from (" << fromX << ", " << fromY << ").");
 		return false; // No entity to move
 	}
 
@@ -97,6 +107,11 @@ bool WorldManager::removeEntity(int x, int y)
 	{
 		if (world[y][x].entity)
 		{
+			if (dynamic_cast<PlayerCharacter*>(world[y][x].entity))
+			{
+				world[y][x].entity = nullptr; // Do not delete player character, just clear the pointer
+				return true;
+			}
 			delete world[y][x].entity; // Delete the entity to avoid memory leaks
 			world[y][x].entity = nullptr; // Clear the entity pointer
 			return true;
@@ -130,15 +145,34 @@ bool WorldManager::setTerrain(int x, int y, Tile::TerrainType terrain)
 	}
 }
 
-void WorldManager::render() const
+void WorldManager::setPlayerPosition(int x, int y)
 {
-	for (const auto& y : world)
+	playerX = x;
+	playerY = y;
+}
+
+bool WorldManager::movePlayer(int toX, int toY)
+{
+	if (moveEntity(playerX, playerY, toX, toY))
 	{
-		for (auto x : y)
-		{
-			std::cout << x.getDisplayChar() << " ";
-		}
-		std::cout << "\n";
+		playerX = toX;
+		playerY = toY;
+		return true;
+	}
+	DEBUG_LOG(LogLevel::ERR, "Failed to move player from (" << playerX << ", " << playerY << ") to (" << toX << ", " << toY << ")");
+	return false; // Failed to move player, either out of bounds or not walkable
+}
+
+Tile WorldManager::getTile(int x, int y) const
+{
+	if (isInBounds(x, y))
+	{
+		return world[y][x]; // Return the tile at the specified coordinates
+	}
+	else
+	{
+		DEBUG_LOG(LogLevel::ERR, "Attempted to get tile out of bounds at (" << x << ", " << y << ")");
+		return {}; // Return an empty tile if out of bounds
 	}
 }
 
@@ -151,7 +185,8 @@ void WorldManager::clearWorld()
 			// Delete the entity if there is one
 			if (x.entity)
 			{
-				delete x.entity;
+				if (!x.entity->isPlayer())
+					delete x.entity;
 				x.entity = nullptr;
 			}
 			x.terrain = Tile::TerrainType::Empty; // Reset terrain to empty

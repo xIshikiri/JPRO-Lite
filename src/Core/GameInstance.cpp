@@ -1,15 +1,18 @@
 #include "GameInstance.h"
 
 #include "Logger.h"
+#include "PlayerCharacter.h"
 #include "TurnManager.h"
 #include "UIManager.h"
 #include "WorldManager.h"
 
 GameInstance* GameInstance::instance = nullptr;
+bool GameInstance::bIsInitializing = false; // Static flag to check if the game instance is initializing
 
 GameInstance::GameInstance()
 	:currentState()
 {
+	playerCharacter = new PlayerCharacter("Player", 1, 100, 10, 10, 10); // Initialize player character
 	worldManager = new WorldManager();
 	turnManager = new TurnManager();
 	uiManager = new UIManager();
@@ -26,10 +29,40 @@ GameInstance* GameInstance::getInstance()
 {
 	if (!instance)
 	{
+		if (isInitializing())
+		{
+			DEBUG_LOG(LogLevel::ERR, "GameInstance is already being initialized.");
+			return nullptr; // Prevent re-initialization if already in progress
+		}
+
+		bIsInitializing = true;
 		instance = new GameInstance();
+		instance->initialize(); // Initialize managers
+		bIsInitializing = false;
+
 		DEBUG_LOG(LogLevel::INFO, "GameInstance created.");
 	}
 	return instance;
+}
+
+void GameInstance::initialize()
+{
+	if (bIsRunning)
+	{
+		DEBUG_LOG(LogLevel::WARN, "GameInstance is already initialized and running.");
+		return; // Prevent re-initialization if already running
+	}
+	if (instance)
+	{
+		worldManager->initialize(); // Initialize the world manager
+		turnManager->initialize(); // Initialize the turn manager
+		uiManager->initialize(); // Initialize the UI manager and its screens
+		DEBUG_LOG(LogLevel::INFO, "GameInstance initialized with WorldManager, TurnManager, and UIManager.");
+	}
+	else
+	{
+		DEBUG_LOG(LogLevel::ERR, "GameInstance is not created yet. Call getInstance() first.");
+	}
 }
 
 void GameInstance::destroyInstance()
@@ -38,6 +71,10 @@ void GameInstance::destroyInstance()
 	{
 		delete instance;
 		instance = nullptr;
+	}
+	else
+	{
+		DEBUG_LOG(LogLevel::WARN, "GameInstance is already destroyed or not created yet.");
 	}
 }
 

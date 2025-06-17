@@ -4,6 +4,10 @@
 
 #include "GameInstance.h"
 
+void MainMenuScreen::initialize()
+{
+}
+
 void MainMenuScreen::render() const
 {
 	// Render the main menu screen

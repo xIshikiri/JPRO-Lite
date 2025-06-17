@@ -9,6 +9,7 @@
 int main()
 {
 	GameInstance::getInstance()->run();
+
 	GameInstance::destroyInstance();
 
 	return 0;

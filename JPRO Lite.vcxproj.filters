@@ -72,6 +72,9 @@
     <ClCompile Include="src\UI\InventoryScreen.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="src\Utils\GameplayStatics.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Components\InventoryComponent.h">
@@ -127,6 +130,9 @@
     </ClInclude>
     <ClInclude Include="src\UI\InventoryScreen.h">
       <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Utils\GameplayStatics.h">
+      <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

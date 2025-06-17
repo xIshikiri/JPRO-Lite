@@ -158,6 +158,7 @@
     <ClCompile Include="src\UI\InventoryScreen.cpp" />
     <ClCompile Include="src\UI\MainMenuScreen.cpp" />
     <ClCompile Include="src\UI\WorldCreator.cpp" />
+    <ClCompile Include="src\Utils\GameplayStatics.cpp" />
     <ClCompile Include="src\Utils\UIUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -177,6 +178,7 @@
     <ClInclude Include="src\UI\IUIScreen.h" />
     <ClInclude Include="src\UI\MainMenuScreen.h" />
     <ClInclude Include="src\UI\WorldCreator.h" />
+    <ClInclude Include="src\Utils\GameplayStatics.h" />
     <ClInclude Include="src\Utils\Logger.h" />
     <ClInclude Include="src\Utils\UIUtils.h" />
   </ItemGroup>

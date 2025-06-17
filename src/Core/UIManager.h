@@ -1,13 +1,16 @@
 #pragma once
 #include <cstdint>
-#include "GameInstance.h"
 #include "IUIScreen.h"
+
+enum class GameState : uint8_t;
 
 class UIManager
 {
 public:
 	UIManager();
 	~UIManager();
+
+	void initialize(); // Initialize the UI manager and its screens
 
 	void setScreen(GameState state);
 	void update();
