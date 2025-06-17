@@ -51,7 +51,9 @@ inline void InternalDebugLog(LogLevel level, const std::string& message) {
     OutputDebugStringA(oss.str().c_str());
 
     // Log file
-    GetLogFile() << oss.str();
+    auto& logFile = GetLogFile();
+    logFile << oss.str();
+    logFile.flush();
 }
 
 #define DEBUG_LOG(level, message)                                \
