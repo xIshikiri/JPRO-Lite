@@ -129,65 +129,62 @@ InventoryComponent& InventoryComponent::operator=(InventoryComponent&& other) no
 	return *this;
 }
 
-bool InventoryComponent::addItem(Item* item)
+bool InventoryComponent::placeItem(Item* item)
 {
 	// Find a valid slot in the inventory
 	for (int i = 0; i < height; ++i)
 	{
 		for (int j = 0; j < width; ++j)
 		{
-			// Check if the current slot is empty and if the item fits in the inventory
-			if (inventory[i][j] == nullptr && i + item->getHeight() <= height && j + item->getWidth() <= width)
+			if (placeItem(i, j, item))
 			{
-				// Found potential slot, check if the item can fit without overlapping other items
-				bool bIsSlotValid = true;
-				for (int k = 0; k < item->getHeight(); ++k)
+				return true; // Item successfully placed in the first valid slot found
+			}
+			if (item->rotateItem()) // Try rotating the item if placement failed
+			{
+				if (placeItem(i, j, item))
 				{
-					for (int l = 0; l < item->getWidth(); ++l)
-					{
-						if (inventory[i + k][j + l] != nullptr)
-						{
-							bIsSlotValid = false; // Slot is not valid as it overlaps with another item
-							break;
-						}
-					}
-					if (!bIsSlotValid) break; // Exit early if slot is invalid
+					return true; // Item successfully placed after rotation
 				}
-				if (bIsSlotValid)
-				{
-					// Place the item in the inventory
-					for (int k = 0; k < item->getHeight(); ++k)
-					{
-						for (int l = 0; l < item->getWidth(); ++l)
-						{
-							inventory[i + k][j + l] = item; // Place the item in the slot
-						}
-					}
-					return true; // Item added successfully
-				}
+				item->rotateItem(); // Rotate back to original orientation if placement failed
 			}
 		}
 	}
 	return false; // No valid slot found, item not added
 }
 
+bool InventoryComponent::placeItem(int x, int y, Item* item)
+{
+	if (canPlaceItemAt(x, y, item))
+	{
+		// Place the item at the specified coordinates
+		for (int i = 0; i < item->getHeight(); ++i)
+		{
+			for (int j = 0; j < item->getWidth(); ++j)
+			{
+				int newX = x + j;
+				int newY = y + i;
+				inventory[newY][newX] = item; // Set the item in the inventory
+			}
+		}
+		return true; // Item successfully placed
+	}
+	return false; // Cannot place item at the specified coordinates
+}
+
 Item* InventoryComponent::getItem(int x, int y) const
 {
-	if (x < 0 || x >= width || y < 0 || y >= height)
-	{
+	if (!isSlotInBounds(x, y))
 		return nullptr; // Out of bounds
-	}
 	return inventory[y][x]; // Return the item at the specified coordinates
 }
 
 void InventoryComponent::removeItem(int x, int y)
 {
-	if (x < 0 || x >= width || y < 0 || y >= height)
-	{
+	if (!isSlotInBounds(x, y))
 		return; // Out of bounds
-	}
 
-	if (inventory[y][x] == nullptr)
+	if (getItem(x, y) == nullptr)
 	{
 		return; // No item at the specified coordinates
 	}
@@ -209,4 +206,43 @@ void InventoryComponent::removeItem(int x, int y)
 
 	// Delete the item to free memory
 	delete item;
+}
+
+bool InventoryComponent::isSlotInBounds(int x, int y) const
+{
+	return (x >= 0 && x < width && y >= 0 && y < height); // Check if the coordinates are within the inventory bounds
+}
+
+bool InventoryComponent::isSlotValid(int x, int y) const
+{
+	if (!isSlotInBounds(x, y))
+	{
+		return false; // Out of bounds
+	}
+	return inventory[y][x] == nullptr; // Return true if the slot is empty
+}
+
+bool InventoryComponent::canPlaceItemAt(int x, int y, Item* item) const
+{
+	if (item)
+	{
+		if (x + item->getWidth() > width || y + item->getHeight() > height)
+		{
+			return false; // Item does not fit in the specified coordinates
+		}
+		for (int i = 0; i < item->getHeight(); ++i)
+		{
+			for (int j = 0; j < item->getWidth(); ++j)
+			{
+				int newX = x + j;
+				int newY = y + i;
+				if (!isSlotValid(newX, newY))
+				{
+					return false; // Slot is not valid for placing the item
+				}
+			}
+		}
+		return true; // All slots are valid for placing the item
+	}
+	return false; // Item is null, cannot place it
 }

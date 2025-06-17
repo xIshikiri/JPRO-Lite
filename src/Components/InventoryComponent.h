@@ -11,9 +11,14 @@ public:
 	InventoryComponent& operator=(const InventoryComponent& other);
 	InventoryComponent& operator=(InventoryComponent&& other) noexcept;
 
-	bool addItem(Item* item);
+	bool placeItem(Item* item);
+	bool placeItem(int x, int y, Item* item);
 	Item* getItem(int x, int y) const;
 	void removeItem(int x, int y);
+
+	bool isSlotInBounds(int x, int y) const;
+	bool isSlotValid(int x, int y) const;
+	bool canPlaceItemAt(int x, int y, Item* item) const;
 
 	int getWidth() const
 	{

@@ -11,11 +11,12 @@ void MainMenuScreen::initialize()
 void MainMenuScreen::render() const
 {
 	// Render the main menu screen
-	std::cout << "Welcome to the Game!" << std::endl;
-	std::cout << "1. Start Game" << std::endl;
-	std::cout << "2. World Creator" << std::endl;
-	std::cout << "3. Exit" << std::endl;
-	std::cout << "Please select an option: ";
+	std::cout << "Welcome to the Game!" << "\n"
+		<< "Please select an option:" << "\n"
+		<< "1. Start Exploration" << "\n"
+		<< "2. Create World" << "\n"
+		<< "3. Open Inventory" << "\n"
+		<< "4. Exit Game" << "\n";
 }
 
 void MainMenuScreen::handleInput(char input)
@@ -29,6 +30,9 @@ void MainMenuScreen::handleInput(char input)
 		GameInstance::setCurrentState(GameState::WorldCreator);
 		break;
 	case '3':
+		GameInstance::setCurrentState(GameState::Inventory);
+		break;
+	case '4':
 		GameInstance::setCurrentState(GameState::Exit);
 		break;
 	default:
