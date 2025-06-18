@@ -9,5 +9,9 @@ public:
 	// IGameEntity interface
 	char getDisplayChar() const override { return '@'; }
 	bool isPlayer() const override { return true; }
+
+private:
+	Item* armor = nullptr;
+	Item* weapon = nullptr; // Player's equipped weapon
 };
 

@@ -3,7 +3,7 @@
 
 class PlayerCharacter;
 class WorldManager;
-class TurnManager;
+class CombatManager;
 class UIManager;
 
 enum class GameState : uint8_t
@@ -35,7 +35,7 @@ public:
 
 	// Managers
 	WorldManager* getWorldManager() const { return worldManager; }
-	TurnManager* getTurnManager() const { return turnManager; }
+	CombatManager* getTurnManager() const { return turnManager; }
 	UIManager* getUIManager() const { return uiManager; }
 
 	PlayerCharacter* getPlayerCharacter() const { return playerCharacter; }
@@ -57,7 +57,7 @@ private:
 	GameState currentState; // Current game state
 
 	WorldManager* worldManager;
-	TurnManager* turnManager;
+	CombatManager* turnManager;
 	UIManager* uiManager;
 
 	// Pointer to the player character

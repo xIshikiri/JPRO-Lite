@@ -2,7 +2,7 @@
 
 #include "Logger.h"
 #include "PlayerCharacter.h"
-#include "TurnManager.h"
+#include "CombatManager.h"
 #include "UIManager.h"
 #include "WorldManager.h"
 
@@ -14,7 +14,7 @@ GameInstance::GameInstance()
 {
 	playerCharacter = new PlayerCharacter("Player", 1, 100, 10, 10, 10); // Initialize player character
 	worldManager = new WorldManager();
-	turnManager = new TurnManager();
+	turnManager = new CombatManager();
 	uiManager = new UIManager();
 }
 
@@ -57,7 +57,7 @@ void GameInstance::initialize()
 		worldManager->initialize(); // Initialize the world manager
 		turnManager->initialize(); // Initialize the turn manager
 		uiManager->initialize(); // Initialize the UI manager and its screens
-		DEBUG_LOG(LogLevel::INFO, "GameInstance initialized with WorldManager, TurnManager, and UIManager.");
+		DEBUG_LOG(LogLevel::INFO, "GameInstance initialized with WorldManager, CombatManager, and UIManager.");
 	}
 	else
 	{

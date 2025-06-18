@@ -9,7 +9,9 @@
 int main()
 {
 	GameInstance::getInstance()->run();
-
+	// Wrogowie
+	// Wskazniki do funkcji
+	// Zapis stanu
 	GameInstance::destroyInstance();
 
 	return 0;

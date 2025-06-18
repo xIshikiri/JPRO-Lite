@@ -144,14 +144,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Characters\Character.cpp" />
+    <ClCompile Include="src\Characters\Enemy.cpp" />
     <ClCompile Include="src\Characters\PlayerCharacter.cpp" />
     <ClCompile Include="src\Components\InventoryComponent.cpp" />
     <ClCompile Include="src\Core\Game.cpp" />
     <ClCompile Include="src\Core\GameInstance.cpp" />
-    <ClCompile Include="src\Core\TurnManager.cpp" />
+    <ClCompile Include="src\Core\CombatManager.cpp" />
     <ClCompile Include="src\Core\UIManager.cpp" />
     <ClCompile Include="src\Core\WorldManager.cpp" />
     <ClCompile Include="src\Items\Item.cpp" />
+    <ClCompile Include="src\Objects\Collectible.cpp" />
     <ClCompile Include="src\UI\CombatScreen.cpp" />
     <ClCompile Include="src\UI\DialogueScreen.cpp" />
     <ClCompile Include="src\UI\ExplorationScreen.cpp" />
@@ -163,13 +165,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Characters\Character.h" />
+    <ClInclude Include="src\Characters\Enemy.h" />
     <ClInclude Include="src\Characters\PlayerCharacter.h" />
     <ClInclude Include="src\Components\InventoryComponent.h" />
     <ClInclude Include="src\Core\GameInstance.h" />
-    <ClInclude Include="src\Core\TurnManager.h" />
+    <ClInclude Include="src\Core\CombatManager.h" />
     <ClInclude Include="src\Core\UIManager.h" />
     <ClInclude Include="src\Core\WorldManager.h" />
     <ClInclude Include="src\Items\Item.h" />
+    <ClInclude Include="src\Objects\Collectible.h" />
     <ClInclude Include="src\Objects\IGameEntity.h" />
     <ClInclude Include="src\UI\CombatScreen.h" />
     <ClInclude Include="src\UI\DialogueScreen.h" />

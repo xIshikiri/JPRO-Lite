@@ -14,6 +14,8 @@ public:
 
 	// IGameEntity interface
 	virtual char getDisplayChar() const override { return 'N'; }
+	EntityType getEntityType() const override { return EntityType::Dialogue; }
+	bool onInteract() override;
 
 	InventoryComponent* getInventory() const
 	{

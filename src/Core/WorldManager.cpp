@@ -159,6 +159,25 @@ bool WorldManager::movePlayer(int toX, int toY)
 		playerY = toY;
 		return true;
 	}
+	if (isInBounds(toX, toY) && world[toX][toY].entity)
+	{
+		if (world[toX][toY].entity->onInteract())
+		{
+			removeEntity(toX, toY); // Remove the entity after interaction
+			if (movePlayer(toX, toY))
+			{
+				playerX = toX;
+				playerY = toY;
+			}
+			DEBUG_LOG(LogLevel::INFO, "Player moved to (" << toX << ", " << toY << ") and interacted with entity.");
+			return true; // Successfully moved and interacted with the entity
+		}
+		else
+		{
+			DEBUG_LOG(LogLevel::INFO, "Player moved to (" << toX << ", " << toY << ") but interaction failed.");
+			return false; // Interaction failed, but player still moved
+		} // Call interact method if the tile has an entity
+	}
 	DEBUG_LOG(LogLevel::ERR, "Failed to move player from (" << playerX << ", " << playerY << ") to (" << toX << ", " << toY << ")");
 	return false; // Failed to move player, either out of bounds or not walkable
 }

@@ -1,7 +1,7 @@
 #pragma once
 #include <cstdint>
 
-class TurnManager
+class CombatManager
 {
 public:
 	void initialize(); // Initialize the turn manager

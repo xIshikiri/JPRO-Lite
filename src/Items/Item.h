@@ -4,7 +4,7 @@
 #include "Logger.h"
 #include "IGameEntity.h"
 
-class Item : public IGameEntity
+class Item
 {
 public:
 	Item(std::string name, std::string description, int width, int height)
@@ -22,14 +22,11 @@ public:
 		}
 	}
 
-	// IGameEntity interface
-	char getDisplayChar() const override { return getSymbol(); };
-
 	std::string getName() const { return name; }
 	std::string getDescription() const { return description; }
 	int getWidth() const { return width; }
 	int getHeight() const { return height; }
-	char getSymbol() const { return symbol; }
+	char getSymbol() const { return getName()[0]; }
 
 	bool rotateItem();
 

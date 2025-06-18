@@ -36,7 +36,7 @@
     <ClCompile Include="src\Core\Game.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="src\Core\TurnManager.cpp">
+    <ClCompile Include="src\Core\CombatManager.cpp">
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="src\Core\WorldManager.cpp">
@@ -75,6 +75,12 @@
     <ClCompile Include="src\Utils\GameplayStatics.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
+    <ClCompile Include="src\Objects\Collectible.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Characters\Enemy.cpp">
+      <Filter>Characters</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Components\InventoryComponent.h">
@@ -86,7 +92,7 @@
     <ClInclude Include="src\Items\Item.h">
       <Filter>Items</Filter>
     </ClInclude>
-    <ClInclude Include="src\Core\TurnManager.h">
+    <ClInclude Include="src\Core\CombatManager.h">
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Objects\IGameEntity.h">
@@ -133,6 +139,12 @@
     </ClInclude>
     <ClInclude Include="src\Utils\GameplayStatics.h">
       <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Objects\Collectible.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Characters\Enemy.h">
+      <Filter>Characters</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

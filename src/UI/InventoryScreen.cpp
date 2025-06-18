@@ -70,7 +70,7 @@ void InventoryScreen::render() const
 				Item* item = inventory->getItem(x, y);
 				if (item)
 				{
-					std::cout << "[" << item->getDisplayChar() << "] ";
+					std::cout << "[" << item->getSymbol() << "] ";
 				}
 				else
 				{

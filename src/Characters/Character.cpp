@@ -70,3 +70,9 @@ Character& Character::operator=(Character&& other) noexcept
 	}
 	return *this;
 }
+
+bool Character::onInteract()
+{
+	DEBUG_LOG(LogLevel::INFO, "Character " << getName() << " interacted with.");
+	return false;
+}

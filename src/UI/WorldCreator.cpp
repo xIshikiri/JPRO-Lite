@@ -1,6 +1,9 @@
 #include "WorldCreator.h"
 
 #include <iostream>
+
+#include "Collectible.h"
+#include "Enemy.h"
 #include "GameInstance.h"
 #include "PlayerCharacter.h"
 #include "UIUtils.h"
@@ -31,9 +34,9 @@ void WorldCreator::handleInput(char input)
 	{
 	case '1':
 	{
-		PlayerCharacter* player = new PlayerCharacter("Player", 1, 100, 10, 10, 5);
-		worldManager->setEntity(coords.first, coords.second, player);
-		std::cout << "Player Character placed at (" << coords.first << ", " << coords.second << ").\n";
+		Enemy* enemy = new Enemy("Zbir", 1, 100, 10, 10, 5, 5);
+		worldManager->setEntity(coords.first, coords.second, enemy);
+		std::cout << "Enemy placed at (" << coords.first << ", " << coords.second << ").\n";
 		break;
 	}
 	case '2':
@@ -45,8 +48,8 @@ void WorldCreator::handleInput(char input)
 	}
 	case '3':
 	{
-		Item* item = new Item("Health Potion", "Restores 50 health", 1, 1);
-		worldManager->setEntity(coords.first, coords.second, item);
+		Item* item = new Item("Health Potion", "Restores 50 health", 1, 2);
+		worldManager->setEntity(coords.first, coords.second, new Collectible(item));
 		std::cout << "Item placed at (" << coords.first << ", " << coords.second << ").\n";
 		break;
 	}
