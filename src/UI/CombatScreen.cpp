@@ -23,7 +23,6 @@ void CombatScreen::render() const
 	if (combatManager->isPlayerTurn())
 	{
 		std::cout << "It's your turn to attack!" << "\n";
-		std::cout << "1. ATTACK!!!";
 	}
 	else
 	{
@@ -36,13 +35,13 @@ void CombatScreen::render() const
 		}
 		std::cout << "Enemy " << (combatManager->getCurrentEnemy() ? combatManager->getCurrentEnemy()->getName() : "Unknown")
 			<< " attacks!" << "\n";
-		std::cout << "Press any key to continue..." << "\n";
 	}
+	combatManager->update(); // Update the combat manager to process the turn
+	std::cout << "Press any key to continue..." << "\n";
 }
 
 void CombatScreen::handleInput(char input)
 {
-	combatManager->update(); // Update the combat manager to process the turn
 	if (GameInstance::getCurrentState() == GameState::Exploration)
 	{
 		std::cout << "Combat ended. Returning to exploration." << "\n";

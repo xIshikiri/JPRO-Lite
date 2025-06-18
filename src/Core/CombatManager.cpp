@@ -29,6 +29,7 @@ void CombatManager::update()
 	}
 	else
 	{
+		currentEnemy->getBehavior()(*currentEnemy); // Execute the enemy's behavior function
 		currentEnemy->Attack(GameplayStatics::getPlayerCharacter()); // Enemy attacks the player
 	}
 	bPlayerTurn = !bPlayerTurn; // Toggle turn after each action

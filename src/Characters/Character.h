@@ -19,6 +19,7 @@ public:
 
 	bool Attack(Character* other);
 	int TakeDamage(int damage);
+	void heal(int health);
 
 	InventoryComponent* getInventory() const
 	{
@@ -44,6 +45,8 @@ public:
 	{
 		return strength;
 	}
+
+	void setStrength(int strength) { this->strength = strength; }
 
 	int getDexterity() const
 	{

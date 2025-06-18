@@ -55,8 +55,7 @@ public:
 	bool loadWorldFromFile(const std::string& filename);
 
 private:
-	Tile world[HEIGHT][WIDTH]; // 2D array representing the world grid
-	//TODO: dynamiczna alokacja
+	Tile** world; // 2D array representing the world grid
 	int playerX = 0;
 	int playerY = 0;
 	void clearWorld(); // Helper function to initialize the world

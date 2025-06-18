@@ -107,3 +107,8 @@ int Character::TakeDamage(int damage)
 	}
 	return health;
 }
+
+void Character::heal(int health)
+{
+	this->health += health;
+}

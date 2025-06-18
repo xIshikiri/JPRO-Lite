@@ -8,6 +8,11 @@
 #include "Logger.h"
 #include "PlayerCharacter.h"
 
+void defaultBehavior(Enemy& enemy)
+{
+	std::cout << enemy.getName() << " forgot how to behave between restarts.\n";
+}
+
 char Tile::getDisplayChar() const
 {
 	if (entity)
@@ -27,6 +32,9 @@ char Tile::getDisplayChar() const
 
 WorldManager::WorldManager()
 {
+	world = new Tile*[HEIGHT];
+	for (int i = 0; i < HEIGHT; ++i)
+		world[i] = new Tile[WIDTH];
 	clearWorld(); // Initialize the world with empty tiles
 	DEBUG_LOG(LogLevel::INFO, "WorldManager initialized.");
 }
@@ -34,6 +42,11 @@ WorldManager::WorldManager()
 WorldManager::~WorldManager()
 {
 	clearWorld(); // Clean up the world tiles
+	for (int i = 0; i < HEIGHT; ++i)
+	{
+		delete[] world[i]; // Delete each row
+	}
+	delete[] world;
 }
 
 void WorldManager::initialize()
@@ -197,13 +210,13 @@ bool WorldManager::saveWorldToFile(const std::string& filename) const
 {
 	std::ofstream out(filename);
 	if (!out) return false;
-	for (const auto& y : world)
+	for (int i = 0; i < HEIGHT; ++i)
 	{
-		for (auto x : y)
+		for (int j = 0; j < WIDTH; ++j)
 		{
-			out << static_cast<int>(x.terrain) << " ";
-			if (x.entity) {
-				out << static_cast<int>(x.entity->getEntityType());
+			out << static_cast<int>(world[i][j].terrain) << " ";
+			if (world[i][j].entity) {
+				out << static_cast<int>(world[i][j].entity->getEntityType());
 			}
 			else {
 				out << -1; // No entity
@@ -212,6 +225,7 @@ bool WorldManager::saveWorldToFile(const std::string& filename) const
 		}
 		out << "\n";
 	}
+	out.close();
 	return true;
 }
 
@@ -224,7 +238,6 @@ bool WorldManager::loadWorldFromFile(const std::string& filename)
 			int terrainInt, entityTypeInt;
 			in >> terrainInt >> entityTypeInt;
 			world[y][x].terrain = static_cast<Tile::TerrainType>(terrainInt);
-			// For entities, you may want to recreate them based on type
 			if (entityTypeInt == -1) {
 				world[y][x].entity = nullptr;
 			}
@@ -236,7 +249,7 @@ bool WorldManager::loadWorldFromFile(const std::string& filename)
 					world[y][x].entity = new Character("John", 1, 10, 5, 5, 5, 5); // Example enemy with dialogue
 					break;
 				case EntityType::Combat:
-					world[y][x].entity = new Enemy("Stefan", 1, 15, 5, 8, 5, 5); // Reuse the player character
+					world[y][x].entity = new Enemy(defaultBehavior, "Stefan", 1, 15, 5, 8, 5, 5); // Reuse the player character
 					break;
 				case EntityType::Collectible:
 					world[y][x].entity = new Collectible(new Item("Health Potion", "Restores 50 health", 1, 2)); // Example item
@@ -253,6 +266,7 @@ bool WorldManager::loadWorldFromFile(const std::string& filename)
 			}
 		}
 	}
+	in.close();
 	return true;
 }
 
@@ -271,18 +285,18 @@ Tile WorldManager::getTile(int x, int y) const
 
 void WorldManager::clearWorld()
 {
-	for (auto& y : world)
+	for (int i = 0; i < HEIGHT; ++i)
 	{
-		for (auto& x : y)
+		for (int j = 0; j < WIDTH; ++j)
 		{
 			// Delete the entity if there is one
-			if (x.entity)
+			if (world[i][j].entity)
 			{
-				if (!x.entity->isPlayer())
-					delete x.entity;
-				x.entity = nullptr;
+				if (!world[i][j].entity->isPlayer())
+					delete world[i][j].entity;
+				world[i][j].entity = nullptr;
 			}
-			x.terrain = Tile::TerrainType::Empty; // Reset terrain to empty
+			world[i][j].terrain = Tile::TerrainType::Empty; // Reset terrain to empty
 		}
 	}
 	DEBUG_LOG(LogLevel::INFO, "World cleared.");

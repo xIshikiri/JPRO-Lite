@@ -12,7 +12,7 @@ bool GameInstance::bIsInitializing = false; // Static flag to check if the game 
 GameInstance::GameInstance()
 	:currentState()
 {
-	playerCharacter = new PlayerCharacter("Player", 1, 20, 10, 10, 10); // Initialize player character
+	playerCharacter = new PlayerCharacter("Player", 1, 60, 10, 10, 10); // Initialize player character
 	worldManager = new WorldManager();
 	combatManager = new CombatManager();
 	uiManager = new UIManager();
