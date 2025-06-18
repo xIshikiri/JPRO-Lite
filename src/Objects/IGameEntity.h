@@ -4,7 +4,8 @@ enum class EntityType
 {
 	Combat,
 	Dialogue,
-	Collectible
+	Collectible,
+	Player
 };
 
 class IGameEntity {

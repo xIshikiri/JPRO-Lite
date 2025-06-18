@@ -1,5 +1,6 @@
 #pragma once
 #include <cstdint>
+#include <string>
 #include <utility>
 
 #include "IGameEntity.h"
@@ -49,6 +50,9 @@ public:
 	void setPlayerPosition(int x, int y);
 	std::pair<int, int> getPlayerPosition() const { return { playerX, playerY }; }
 	bool movePlayer(int toX, int toY);
+
+	bool saveWorldToFile(const std::string& filename) const;
+	bool loadWorldFromFile(const std::string& filename);
 
 private:
 	Tile world[HEIGHT][WIDTH]; // 2D array representing the world grid

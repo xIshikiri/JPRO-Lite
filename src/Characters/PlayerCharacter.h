@@ -9,6 +9,10 @@ public:
 	// IGameEntity interface
 	char getDisplayChar() const override { return '@'; }
 	bool isPlayer() const override { return true; }
+	EntityType getEntityType() const override { return EntityType::Player; }
+
+	void serialize(const std::string& filename) const;
+	static PlayerCharacter* deserialize(const std::string& filename);
 
 private:
 	Item* armor = nullptr;

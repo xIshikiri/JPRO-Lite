@@ -112,6 +112,10 @@ void GameInstance::stop()
 		DEBUG_LOG(LogLevel::WARN, "GameInstance is not running.");
 		return; // Prevent stopping if not running
 	}
+	if (worldManager->saveWorldToFile("world.txt"))
+		DEBUG_LOG(LogLevel::INFO, "World saved to file successfully.");
+	else
+		DEBUG_LOG(LogLevel::ERR, "Failed to save world to file.");
 	bIsRunning = false; // Set running flag to false
 	DEBUG_LOG(LogLevel::INFO, "GameInstance stopped.");
 }

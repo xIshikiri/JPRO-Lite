@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+#include "Collectible.h"
+#include "Enemy.h"
 #include "GameplayStatics.h"
 #include "Logger.h"
 #include "PlayerCharacter.h"
@@ -36,7 +38,16 @@ WorldManager::~WorldManager()
 
 void WorldManager::initialize()
 {
-	setEntity(0, 0, GameplayStatics::getPlayerCharacter()); // Set the player character at the starting position (0, 0)
+	if (loadWorldFromFile("world.txt"))
+	{
+		DEBUG_LOG(LogLevel::INFO, "World loaded from file successfully.");
+		return;
+	}
+	DEBUG_LOG(LogLevel::INFO, "No saved world found, initializing a new world.");
+	// place player character from game instance at 0 0
+	playerX = 0;
+	playerY = 0;
+	world[0][0].entity = GameplayStatics::getPlayerCharacter(); // Set the player character at the starting position
 }
 
 bool WorldManager::isInBounds(int x, int y) const
@@ -180,6 +191,69 @@ bool WorldManager::movePlayer(int toX, int toY)
 	}
 	DEBUG_LOG(LogLevel::ERR, "Failed to move player from (" << playerX << ", " << playerY << ") to (" << toX << ", " << toY << ")");
 	return false; // Failed to move player, either out of bounds or not walkable
+}
+
+bool WorldManager::saveWorldToFile(const std::string& filename) const
+{
+	std::ofstream out(filename);
+	if (!out) return false;
+	for (const auto& y : world)
+	{
+		for (auto x : y)
+		{
+			out << static_cast<int>(x.terrain) << " ";
+			if (x.entity) {
+				out << static_cast<int>(x.entity->getEntityType());
+			}
+			else {
+				out << -1; // No entity
+			}
+			out << " ";
+		}
+		out << "\n";
+	}
+	return true;
+}
+
+bool WorldManager::loadWorldFromFile(const std::string& filename)
+{
+	std::ifstream in(filename);
+	if (!in) return false;
+	for (int y = 0; y < HEIGHT; ++y) {
+		for (int x = 0; x < WIDTH; ++x) {
+			int terrainInt, entityTypeInt;
+			in >> terrainInt >> entityTypeInt;
+			world[y][x].terrain = static_cast<Tile::TerrainType>(terrainInt);
+			// For entities, you may want to recreate them based on type
+			if (entityTypeInt == -1) {
+				world[y][x].entity = nullptr;
+			}
+			else {
+				// Make entity based on the type
+				switch (static_cast<EntityType>(entityTypeInt))
+				{
+				case EntityType::Dialogue:
+					world[y][x].entity = new Character("John", 1, 10, 5, 5, 5, 5); // Example enemy with dialogue
+					break;
+				case EntityType::Combat:
+					world[y][x].entity = new Enemy("Stefan", 1, 15, 5, 8, 5, 5); // Reuse the player character
+					break;
+				case EntityType::Collectible:
+					world[y][x].entity = new Collectible(new Item("Health Potion", "Restores 50 health", 1, 2)); // Example item
+					break;
+				case EntityType::Player:
+					world[y][x].entity = GameplayStatics::getPlayerCharacter(); // Set the player character
+					setPlayerPosition(x, y); // Update player position
+					break;
+				default:
+					DEBUG_LOG(LogLevel::ERR, "Unknown entity type " << entityTypeInt << " at (" << x << ", " << y << ")");
+					world[y][x].entity = nullptr; // Unknown entity type, set to nullptr
+					break;
+				}
+			}
+		}
+	}
+	return true;
 }
 
 Tile WorldManager::getTile(int x, int y) const
