@@ -12,16 +12,16 @@ bool GameInstance::bIsInitializing = false; // Static flag to check if the game 
 GameInstance::GameInstance()
 	:currentState()
 {
-	playerCharacter = new PlayerCharacter("Player", 1, 100, 10, 10, 10); // Initialize player character
+	playerCharacter = new PlayerCharacter("Player", 1, 20, 10, 10, 10); // Initialize player character
 	worldManager = new WorldManager();
-	turnManager = new CombatManager();
+	combatManager = new CombatManager();
 	uiManager = new UIManager();
 }
 
 GameInstance::~GameInstance()
 {
 	delete worldManager;
-	delete turnManager;
+	delete combatManager;
 	delete uiManager;
 }
 
@@ -55,7 +55,7 @@ void GameInstance::initialize()
 	if (instance)
 	{
 		worldManager->initialize(); // Initialize the world manager
-		turnManager->initialize(); // Initialize the turn manager
+		combatManager->initialize(); // Initialize the turn manager
 		uiManager->initialize(); // Initialize the UI manager and its screens
 		DEBUG_LOG(LogLevel::INFO, "GameInstance initialized with WorldManager, CombatManager, and UIManager.");
 	}

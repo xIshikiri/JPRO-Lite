@@ -34,7 +34,7 @@ void WorldCreator::handleInput(char input)
 	{
 	case '1':
 	{
-		Enemy* enemy = new Enemy("Zbir", 1, 100, 10, 10, 5, 5);
+		Enemy* enemy = new Enemy("Zbir", 1, 15, 5, 8, 5, 5);
 		worldManager->setEntity(coords.first, coords.second, enemy);
 		std::cout << "Enemy placed at (" << coords.first << ", " << coords.second << ").\n";
 		break;

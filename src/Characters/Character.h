@@ -17,6 +17,9 @@ public:
 	EntityType getEntityType() const override { return EntityType::Dialogue; }
 	bool onInteract() override;
 
+	bool Attack(Character* other);
+	int TakeDamage(int damage);
+
 	InventoryComponent* getInventory() const
 	{
 		return inventory;

@@ -76,3 +76,34 @@ bool Character::onInteract()
 	DEBUG_LOG(LogLevel::INFO, "Character " << getName() << " interacted with.");
 	return false;
 }
+
+bool Character::Attack(Character* other)
+{
+	if (!other)
+	{
+		DEBUG_LOG(LogLevel::ERR, "Cannot attack: other character is null.");
+		return false;
+	}
+	other->TakeDamage(strength); // Deal damage equal to this character's strength
+	return true; // Attack was successful
+}
+
+int Character::TakeDamage(int damage)
+{
+	if (damage < 0)
+	{
+		DEBUG_LOG(LogLevel::WARN, "Damage cannot be negative. No damage applied.");
+		return 0; // No damage applied if negative
+	}
+	health -= damage; // Reduce health by the damage amount
+	if (health < 0)
+	{
+		health = 0; // Ensure health does not go below zero
+		DEBUG_LOG(LogLevel::INFO, getName() << " has been defeated.");
+	}
+	else
+	{
+		DEBUG_LOG(LogLevel::INFO, getName() << " took " << damage << " damage. Remaining health: " << health);
+	}
+	return health;
+}

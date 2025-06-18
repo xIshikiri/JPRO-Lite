@@ -35,7 +35,7 @@ public:
 
 	// Managers
 	WorldManager* getWorldManager() const { return worldManager; }
-	CombatManager* getTurnManager() const { return turnManager; }
+	CombatManager* getCombatManager() const { return combatManager; }
 	UIManager* getUIManager() const { return uiManager; }
 
 	PlayerCharacter* getPlayerCharacter() const { return playerCharacter; }
@@ -57,7 +57,7 @@ private:
 	GameState currentState; // Current game state
 
 	WorldManager* worldManager;
-	CombatManager* turnManager;
+	CombatManager* combatManager;
 	UIManager* uiManager;
 
 	// Pointer to the player character
